@@ -68,7 +68,7 @@ class Plotter(object):
 
   @check_do_plot
   def plot_one(self, img):
-    p = plt.subplot(self.rows, self.cols, self.plot_counter)
+    p = plt.subplot(int(self.rows), int(self.cols), self.plot_counter)
     p.axes.get_xaxis().set_visible(False)
     p.axes.get_yaxis().set_visible(False)
     plt.imshow(bgr2rgb(img))
