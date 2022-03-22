@@ -81,7 +81,7 @@ def list_imgpaths(images_folder=None, src_image=None, dest_image=None):
 
 def morph(src_img, src_points, dest_img, dest_points,
           video, width=500, height=600, num_frames=20, fps=10,
-          out_frames=None, out_video=None, plot=False, background='black'):
+          out_frames=None, out_video=None, plot=False, background='black', blur_edges=True):
   """
   Create a morph sequence from source to destination image
 
@@ -108,6 +108,11 @@ def morph(src_img, src_points, dest_img, dest_points,
 
     if background in ('transparent', 'average'):
       mask = blender.mask_from_points(average_face.shape[:2], points)
+
+      if blur_edges:
+        blur_radius = 15
+        mask = cv2.blur(mask, (blur_radius, blur_radius))
+
       average_face = np.dstack((average_face, mask))
 
       if background == 'average':
